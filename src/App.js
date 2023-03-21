@@ -31,6 +31,19 @@ function App() {
     })
   }
 
+  const completeTodo = (text) => {
+    const todoIndex = todos.findIndex(todo=>todo.text===text);
+    const newTodo = [...todos];
+    newTodo[todoIndex].completed = !newTodo[todoIndex].completed;
+    setTodos(newTodo);
+  }
+  const deleteTodo = (text) => {
+    const todoIndex = todos.findIndex(todo=>todo.text===text);
+    const newTodo = [...todos];
+    newTodo.splice(todoIndex,1);
+    setTodos(newTodo);
+  }
+
   return (
     //React.Fragment para reemplazar el div.
     <React.Fragment>
@@ -49,6 +62,8 @@ function App() {
             key={todo.text} 
             text={todo.text}
             completed={todo.completed}
+            onComplete={()=>completeTodo(todo.text)}
+            onDelete={()=>deleteTodo(todo.text)}
             />
         ))}
       </TodoList>
