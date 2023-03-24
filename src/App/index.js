@@ -1,9 +1,5 @@
 import React from 'react';
-import { TodoCounter } from './TodoCounter';
-import { TodoSearch } from './TodoSearch';
-import { CreateTodoButton } from './CreateTodoButton';
-import { TodoList } from './TodoList';
-import { TodoItem } from './TodoItem';
+import { AppUI } from './AppUI';
 // import './App.css';
 
 const defaultTodos = [
@@ -30,7 +26,6 @@ function App() {
       return todoText.includes(searchText);
     })
   }
-
   const completeTodo = (text) => {
     const todoIndex = todos.findIndex(todo=>todo.text===text);
     const newTodo = [...todos];
@@ -43,33 +38,16 @@ function App() {
     newTodo.splice(todoIndex,1);
     setTodos(newTodo);
   }
-
   return (
-    //React.Fragment para reemplazar el div.
-    <React.Fragment>
-      <TodoCounter
-        completed={completedTodos}
-        total={totalTodos}
-      />
-      <TodoSearch
-        searchValue={searchValue}
-        setSearchValue={setSearchValue}
-      />
-      
-      <TodoList>
-        { searchedTodos.map(todo => (
-          <TodoItem 
-            key={todo.text} 
-            text={todo.text}
-            completed={todo.completed}
-            onComplete={()=>completeTodo(todo.text)}
-            onDelete={()=>deleteTodo(todo.text)}
-            />
-        ))}
-      </TodoList>
-
-      <CreateTodoButton/>
-    </React.Fragment>
+    <AppUI
+      completedTodos={completedTodos}
+      totalTodos={totalTodos}
+      searchValue={searchValue}
+      setSearchValue={setSearchValue}
+      searchedTodos={searchedTodos}
+      completeTodo={completeTodo}
+      deleteTodo={deleteTodo}
+    />
   );
 }
 
