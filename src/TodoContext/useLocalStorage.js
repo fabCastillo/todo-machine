@@ -10,8 +10,6 @@ function useLocalStorage(itemName, initValue) {
         try {
           const localStorageItems = localStorage.getItem(itemName);
           let parsedItem;
-          console.log('hola');
-          console.log(localStorageItems);
           if (localStorageItems) {
             parsedItem = JSON.parse(localStorageItems);
           }else{
